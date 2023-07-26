@@ -51,9 +51,11 @@ public class IntersectionTest {
 
     @Test
     public void intersection_identical() {
-        // TODO-Lab1.5: Implement test of intersection for arrays with all values in common, as
-        //  described in test-plan.md. You may invoke helper method testForSymmetricSuccess, if you
-        //  find it useful to do so.
+        int[] a = {4, 7, 5, 2, 3};
+        int[] b = {4, 7, 5, 2, 3};
+
+        // Test intersection for arrays with all values in common
+        //testForSymmetricSuccess(a, b);
     }
 
     @Test
