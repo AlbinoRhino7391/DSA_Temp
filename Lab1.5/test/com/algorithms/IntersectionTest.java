@@ -54,35 +54,52 @@ public class IntersectionTest {
         int[] a = {4, 7, 5, 2, 3};
         int[] b = {4, 7, 5, 2, 3};
 
-        // Test intersection for arrays with all values in common
-        //testForSymmetricSuccess(a, b);
+        Set<Integer> expected = Set.of(4, 7, 5, 2, 3);
+        testForSymmetricSuccess(a, b, expected, intersection::intersection);
     }
 
     @Test
     public void intersectionFast_identical() {
-        // TODO-Lab1.5: Implement test of intersectionFast for arrays with all values in common, as
-        //  described in test-plan.md. You may invoke helper method testForSymmetricSuccess, if you
-        //  find it useful to do so.
+        int[] a = {4, 7, 5, 2, 3};
+        int[] b = {4, 7, 5, 2, 3};
+
+        Set<Integer> expected = Set.of(4, 7, 5, 2, 3);
+        testForSymmetricSuccess(a, b, expected, intersection::intersectionFast);
     }
 
     @Test
     public void intersection_empty() {
-        // TODO-Lab1.5: Implement test of intersection for arrays with no values in common, as
-        //  described in test-plan.md. You may invoke helper method testForSymmetricSuccess, if you
-        //  find it useful to do so.
+        int[] a = {1, 2, 3};
+        int[] b = {4, 5, 6};
+
+        Set<Integer> expected = Set.of();
+        testForSymmetricSuccess(a, b, expected, intersection::intersection);
     }
 
     @Test
     public void intersectionFast_empty() {
-        // TODO-Lab1.5: Implement test of intersectionFast for arrays with no values in common, as
-        //  described in test-plan.md. You may invoke helper method testForSymmetricSuccess, if you
-        //  find it useful to do so.
+        int[] a = {1, 2, 3};
+        int[] b = {4, 5, 6};
+
+        Set<Integer> expected = Set.of();
+        testForSymmetricSuccess(a, b, expected, intersection::intersectionFast);
     }
 
-    // TODO-Lab1.5 (optional): Implement tests of intersection and intersectionFast, with a null
-    //  value for one or the other (or both) of the arguments, and a NullPointerException being
-    //  thrown. Try to take advantage of symmetry, and feel free to create a helper method to reduce
-    //  duplicated code.
+    @Test(expected = NullPointerException.class)
+    public void intersection_nullArg() {
+        int[] a = {1, 2, 3};
+        int[] b = null;
+
+        intersection.intersection(a, b);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void intersectionFast_nullArg() {
+        int[] a = {1, 2, 3};
+        int[] b = null;
+
+        intersection.intersectionFast(a, b);
+    }
 
     private void testForSymmetricSuccess(int[] a, int[] b, Set<Integer> expected,
             BiFunction<int[], int[], Set<Integer>> invocation) {
