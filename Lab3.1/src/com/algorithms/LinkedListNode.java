@@ -1,33 +1,29 @@
 package com.algorithms;
 
-public class LinkedListNode {
+public class LinkedListNode<T> { // Modify to use generics, instead of int.
 
-    // TODO Lab 3.1.B: Modify to use generics, instead of int.
+    private T value; // Data member of the node
+    private LinkedListNode<T> next; // Self-referential pointer
 
-    private int value; //data member of the node
-    private LinkedListNode next; // self-referential pointer
-
-    public LinkedListNode(int value, LinkedListNode next) {
+    public LinkedListNode(T value, LinkedListNode<T> next) {
         this.value = value;
         this.next = next;
     }
 
-    public LinkedListNode getNext() {
+    public LinkedListNode<T> getNext() {
         return next;
     }
 
-    public LinkedListNode setNext(LinkedListNode next) {
+    public void setNext(LinkedListNode<T> next) {
         this.next = next;
-        return this;
     }
 
-    public int getValue() {
+    public T getValue() {
         return value;
     }
 
-    public LinkedListNode setValue(int value) {
+    public void setValue(T value) {
         this.value = value;
-        return this;
     }
 
     @Override
@@ -36,5 +32,5 @@ public class LinkedListNode {
                 "value=" + value +
                 '}';
     }
-
 }
+
