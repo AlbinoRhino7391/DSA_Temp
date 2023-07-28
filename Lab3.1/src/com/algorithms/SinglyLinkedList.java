@@ -4,6 +4,38 @@ public class SinglyLinkedList<T> { // Modify to use generics, instead of int.
 
     private LinkedListNode<T> head; // Modify to use generics, instead of int.
 
+    // Add a new node with the given item at the specified position in the linked list
+    public void addInPosition(T item, int index) {
+        if (index < 0) {
+            throw new IllegalArgumentException("Index cannot be negative");
+        }
+
+        if (index == 0) {
+            // Case 1: Insert at the beginning (index = 0)
+            addFront(item);
+        } else {
+            // Traverse the linked list to find the node at the previous index (index - 1)
+            LinkedListNode<T> prevNode = head;
+            int currentIndex = 0;
+
+            while (currentIndex < index - 1 && prevNode != null) {
+                prevNode = prevNode.getNext();
+                currentIndex++;
+            }
+
+            if (prevNode == null && currentIndex < index - 1) {
+                // Case 3: Index is larger than the list length, so insert at the end
+                appendToList(item);
+            } else {
+                // Case 2: Insert in the middle (1 <= index <= linkedList length - 1)
+                LinkedListNode<T> newNode = new LinkedListNode<>(item, null);
+                LinkedListNode<T> nextNode = prevNode.getNext();
+                prevNode.setNext(newNode);
+                newNode.setNext(nextNode);
+            }
+        }
+    }
+
     // Add a new node with the given item at the front of the linked list
     public void addFront(T item) { // Modify to use generics, instead of int.
         // 1. Create a new node with the given item and set its next node to the current head
