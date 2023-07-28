@@ -25,7 +25,7 @@ public class ChainedHashTableTest {
     public void put() {
         String expected = "Ken";
         chainedHashTable.put(88, "Ken");
-        String actual = chainedHashTable.get(88).toString();
+        String actual = chainedHashTable.get(88);
         assertEquals(expected, actual);
     }
 

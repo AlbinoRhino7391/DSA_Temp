@@ -42,29 +42,61 @@ public class ChainedHashTable<K, V> implements HashTable<K, V> {
         System.out.println(chainedHashTable.get(31));
     }
 
+    /*
+     Changed back to my implementation instead of the instructors, ran multiple side by side tests to get the same output on every single test.
+     The reason being:
+        Both implementations perform the same essential operations and correctly add a new Pair<K, V> to the appropriate linked list at the index determined by the hash code.
+        The differences are purely in the order of the operations for better understanding.
+        The order of operations doesn't affect the functionality of the method.
+        The implementations are effectively equivalent, and either one would work correctly.
+     */
     public void put(K key, V value) {
-        // TODO-Lab4.1: Implement the logic below
-        // 1. get the int hash code by calling the hashKey( ) method of the hashProvider, passing to
-        // passing to it the key argument and the length of the array
-        // because this is a remainder hash, this method will return a number
-        // between 0 and the length of the array
-        // 2. then use this value to find the appropriate element of the array
-        // and add a new Pair (key, value) to the beginning of the LinkedList
+        // 1. Get the hash code by calling the hashKey() method of the hashProvider,
+        //    passing to it the key argument and the length of the array.
+        //    This will return a number between 0 and the length of the array.
+        int index = hashProvider.hashKey(key, array.length);
+
+        // 2. Use the obtained index to find the appropriate linked list in the array.
+        LinkedList<Pair<K, V>> list = array[index];
+
+        // 3. Add a new Pair (key, value) to the beginning of the linked list.
+        Pair<K, V> newPair = new Pair<>(key, value);
+        list.addFirst(newPair);
+
+
     }
 
+
+
     public V get(K key) {
-        // TODO-Lab4.1: Implement the logic below
         // 1. If the key is null, return null
-        // 2. Get the int hash value by calling the hashKey( ) method of the hashProvider, passing
-        //    to it the key argument and the length of the array. Because this is a remainder hash,
-        //    this method will return a number between 0 and the length of the array.
+        if (key == null) {
+            return null;
+        }
+
+        // 2. Get the int hash value by calling the hashKey() method of the hashProvider, passing
+        //    to it the key argument and the length of the array.
+        //    Because this is a remainder hash, this method will return a number between 0 and the length of the array.
+        int index = hashProvider.hashKey(key, array.length);
+
         // 3. Get a linked list of Pair<K, V> using the hashValue as the index off the array.
+        LinkedList<Pair<K, V>> list = array[index];
+
         // 4. For each Pair<K, V> from the list:
-        //    a. Get the key k from the Pair.
-        //    b. If k is equal to the value of the key parameter, return the value v from the Pair.
-        // 5. if not found, return null.
+        for (Pair<K, V> pair : list) {
+            // a. Get the key k from the Pair.
+            K k = pair.getKey();
+
+            // b. If k is equal to the value of the key parameter, return the value v from the Pair.
+            if (key.equals(k)) {
+                return pair.getValue();
+            }
+        }
+
+        // 5. If not found, return null.
         return null;
     }
+
 
     public void remove(K key) {
         if (key == null) {
