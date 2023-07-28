@@ -12,9 +12,9 @@ public class Customer {
         this.balance = balance;
     }
 
-//    public void setCustNo(int custNo) {
-//        this.custNo = custNo;
-//    }
+    public void setCustNo(int custNo) {
+        this.custNo = custNo;
+    }
 
     public int getCustNo() {
         return custNo;

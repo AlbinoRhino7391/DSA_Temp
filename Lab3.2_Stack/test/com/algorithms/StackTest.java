@@ -49,6 +49,7 @@ public class StackTest {
         int expectedCustNo = 23456;
         custStack.push(new Customer(23456, "Wendy Smith", 450));
         custStack.push(null);
+        assertNull(custStack.pop());
         assertEquals(expectedCustNo, custStack.pop().getCustNo());
     }
 
