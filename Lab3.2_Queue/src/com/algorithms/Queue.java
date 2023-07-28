@@ -43,13 +43,54 @@ public class Queue<V> {
     }
 
     public void enqueue(V item) {
-        // TODO Lab 3.2.a: Create pseudocode for operation.
-        // TODO Lab 3.2.b: Implement based on pseudocode.
+        /*Create a new node with the provided item as its value.
+                If the queue is empty, set both head and tail to the new node.
+                Otherwise, set the next of the current tail to the new node, and set the previous of the new node to the current tail.
+        Update the tail to point to the new node.
+         */
+        // Create a new node with the provided item as its value
+        DblLinkedListNode<V> newNode = new DblLinkedListNode<>(item, null, null);
+
+        // If the queue is empty, set both head and tail to the new node
+        if (head == null) {
+            head = newNode;
+        } else {
+            // Set the next of the current tail to the new node, and the previous of the new node to the current tail
+            tail.setNext(newNode);
+            newNode.setPrevious(tail);
+
+            // Update the tail to point to the new node
+        }
+        tail = newNode;
     }
 
     public V dequeue() {
-        // TODO Lab 3.2.a: Create pseudocode for operation.
-        // TODO Lab 3.2.b: Implement based on pseudocode.
-    }
+        /*
+        If the queue is empty (head is null), return null.
+        Otherwise, get the value of the node at the head.
+        If the head has a next node, update the head to point to the next node and set the previous of the new head to null.
+        If the head does not have a next node (i.e., it is the last node in the queue), set both head and tail to null (empty queue).
+        Return the value obtained in step 2.
+         */
+        // If the queue is empty, return null
+        if (head == null) {
+            return null;
+        }
 
+        // Get the value of the node at the head
+        V value = head.getValue();
+
+        // If the head has a next node, update the head to point to the next node and set the previous of the new head to null
+        if (head.getNext() != null) {
+            head = head.getNext();
+            head.setPrevious(null);
+        } else {
+            // If the head is the last node (i.e., it is the only node in the queue), set both head and tail to null
+            head = null;
+            tail = null;
+        }
+
+        // Return the value obtained in step 2
+        return value;
+    }
 }
